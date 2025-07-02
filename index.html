@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Civil Engineer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div id="bim-model"></div>
+        <div class="loading-text">Loading...</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content hidden">
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <div class="hero-left">
+                    <div class="image-container">
+                        <img src="aditya.jpg" alt="Profile Image" class="profile-image">
+                    </div>
+                    <div class="circular-text">
+                        <svg viewBox="0 0 100 100">
+                            <path id="circle" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none"/>
+                            <text>
+                                <textPath href="#circle">
+                                    LETS TALK • LETS TALK • LETS TALK • LETS TALK •
+                                </textPath>
+                            </text>
+                        </svg>
+                        <div class="arrow-container">
+                            <!-- <div class="arrow">→</div> -->
+                            <div class="arrow-solid">➜</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-right">
+                    <h1>
+                        <span class="line-1">A creative</span>
+                        <span class="line-2">BIM professional</span>
+                        <span class="line-3">& structural designer</span>
+                    </h1>
+                    <p>I collaborate with clients globally to design impactful, mission-focused civil structures that drive results and achieve construction goals.</p>
+                    <button class="resume-btn">My Resume</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="skills">
+            <div class="section-divider"></div>
+            <div class="skills-track">
+                <div class="skills-content">
+                    <!-- First set of skills -->
+                    <div class="skill-tile">
+                        <img src="assets/autocad_logo.png" alt="AutoCAD">
+                        <span>AutoCAD</span>
+                    </div>
+                    <div class="skill-tile">
+                        <img src="assets/revit_logo.jpg" alt="Revit">
+                        <span>Revit</span>
+                    </div>
+                    <div class="skill-tile">
+                        <img src="assets/navisworks-logo.png" alt="Navisworks">
+                        <span>Navisworks</span>
+                    </div>
+                    <div class="skill-tile">
+                        <img src="assets/c3d_logo" alt="Civil 3D">
+                        <span>Civil 3D</span>
+                    </div>
+                    <div class="skill-tile">
+                        <img src="assets/Dynamo_logo.png" alt="Dynamo">
+                        <span>Dynamo</span>
+                    </div>
+                    <div class="skill-tile">
+                        <img src="assets/msproject.png" alt="MS Project">
+                        <span>MS Project</span>
+                    </div>
+                    <div class="skill-tile">
+                        <img src="assets/excel_logo.jpg" alt="Excel">
+                        <span>Excel</span>
+                    </div>
+                    <div class="skill-tile">
+                        <img src="assets/recaplogo.png" alt="Autodesk_recap">
+                        <span>Recap Pro</span>
+                    </div>
+
+                    <!-- Duplicate set for seamless scrolling -->
+                    <div class="skill-tile">
+                        <img src="assets/autocad_logo.png" alt="AutoCAD">
+                        <span>AutoCAD</span>
+                    </div>
+                    <div class="skill-tile">
+                        <img src="assets/revit_logo.jpg" alt="Revit">
+                        <span>Revit</span>
+                    </div>
+                    <div class="skill-tile">
+                        <img src="assets/navisworks-logo.png" alt="Navisworks">
+                        <span>Navisworks</span>
+                    </div>
+                    <div class="skill-tile">
+                        <img src="assets/c3d_logo" alt="Civil 3D">
+                        <span>Civil 3D</span>
+                    </div>
+                    <div class="skill-tile">
+                        <img src="assets/Dynamo_logo.png" alt="Dynamo">
+                        <span>Dynamo</span>
+                    </div>
+                    <div class="skill-tile">
+                        <img src="assets/msproject.png" alt="MS Project">
+                        <span>MS Project</span>
+                    </div>
+                    <div class="skill-tile">
+                        <img src="assets/excel_logo.jpg" alt="Excel">
+                        <span>Excel</span>
+                    </div>
+                    <div class="skill-tile">
+                        <img src="assets/recap_logo.jpg" alt="Autodesk_recap">
+                        <span>Recap Pro</span>
+                    </div>
+                </div>
+            </div>
+            <div class="section-divider"></div>
+        </section>
+
+        <!-- About Me Section -->
+        <section class="about" id="about">
+            <div class="about-gradient-bar"></div>
+            <div class="about-container">
+                <h2 class="about-title">About Me</h2>
+                <p class="about-desc">
+                    <span style="color:#4CAF50;font-weight:600;">Hi, I'm Aditya!</span> I'm a passionate <b>BIM professional</b> and <b>structural designer</b> with a strong background in civil engineering. My journey has taken me through diverse projects, where I've leveraged technology and creativity to deliver innovative solutions.<br><br>
+                    I thrive on collaborating with multidisciplinary teams and am dedicated to <span style="color:#4CAF50;font-weight:500;">continuous learning</span> and growth. Whether it's optimizing workflows, designing resilient structures, or mentoring peers, I bring energy and expertise to every challenge.<br><br>
+                    <span style="font-style:italic;">Let's build the future together!</span>
+                </p>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <!--
+        <section class="experience">
+            <div class="section-divider"></div>
+            <div class="experience-container">
+                <div class="experience-grid">
+                    <div class="experience-left">
+                        <div class="work-history-label">★ WORK HISTORY</div>
+                        <h2 class="experience-title">Experience</h2>
+                        <p class="experience-desc">I have worked with some of the most innovative industry leaders to help build their top-notch products.</p>
+                    </div>
+                    <div class="experience-right">
+                        <ul class="experience-list">
+                            <li class="experience-row">
+                                <div class="exp-logo"><img src="assets/company1.png" alt="OneShield Software"></div>
+                                <div class="exp-details">
+                                    <div class="exp-role">Software Engineer</div>
+                                    <div class="exp-company">@OneShield Software</div>
+                                </div>
+                                <div class="exp-dates">Aug 2022 — Present</div>
+                            </li>
+                            <li class="experience-row">
+                                <div class="exp-logo"><img src="assets/company2.png" alt="Design and Code"></div>
+                                <div class="exp-details">
+                                    <div class="exp-role">Founder</div>
+                                    <div class="exp-company">@Design and Code</div>
+                                </div>
+                                <div class="exp-dates">Jan 2021 — Present</div>
+                            </li>
+                            <li class="experience-row">
+                                <div class="exp-logo"><img src="assets/company3.png" alt="BlackboxAI"></div>
+                                <div class="exp-details">
+                                    <div class="exp-role">Design Engineer</div>
+                                    <div class="exp-company">@BlackboxAI</div>
+                                </div>
+                                <div class="exp-dates">Feb 2025 — Mar 2025</div>
+                            </li>
+                            <li class="experience-row">
+                                <div class="exp-logo"><img src="assets/company4.png" alt="Social3"></div>
+                                <div class="exp-details">
+                                    <div class="exp-role">UI/UX Designer</div>
+                                    <div class="exp-company">@Social3</div>
+                                </div>
+                                <div class="exp-dates">Aug 2022 — Sep 2023</div>
+                            </li>
+                        </ul>
+                        <div class="show-more-row"><a href="#" class="show-more-link">Show More</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-divider"></div>
+        </section>
+        -->
+    </div>
+
+    <script src="components/navbar.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
