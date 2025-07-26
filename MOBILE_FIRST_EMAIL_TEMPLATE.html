@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Contact Message</title>
+</head>
+<body style="margin: 0; padding: 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+    
+    <!-- Main Container -->
+    <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.1); margin: 20px auto;">
+        
+        <!-- Header Section -->
+        <div style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); padding: 30px 20px; text-align: center;">
+            <div style="width: 60px; height: 60px; background: rgba(255,255,255,0.2); border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;">
+                <span style="font-size: 24px;">💬</span>
+            </div>
+            <h1 style="color: white; margin: 0; font-size: 24px; font-weight: 700;">New Message!</h1>
+            <p style="color: rgba(255,255,255,0.95); margin: 10px 0 0 0; font-size: 16px;">Someone reached out through your portfolio</p>
+        </div>
+        
+        <!-- Content Section -->
+        <div style="padding: 25px 20px;">
+            
+            <!-- Message Content -->
+            <div style="background: #f8f9fa; border-radius: 12px; padding: 20px; margin-bottom: 25px; border-left: 4px solid #4CAF50;">
+                <h3 style="color: #2c3e50; margin: 0 0 15px 0; font-size: 18px; font-weight: 600;">Message</h3>
+                <p style="color: #2c3e50; margin: 0; font-size: 15px; line-height: 1.6; word-wrap: break-word;">{{message}}</p>
+            </div>
+            
+            <!-- Contact Details -->
+            <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 12px; padding: 20px; margin-bottom: 25px;">
+                <h3 style="color: #2c3e50; margin: 0 0 20px 0; font-size: 18px; font-weight: 600;">Contact Details</h3>
+                
+                <!-- Name -->
+                <div style="margin-bottom: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 3px solid #4CAF50;">
+                    <div style="color: #666; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; font-weight: 600;">Name</div>
+                    <div style="color: #2c3e50; font-weight: 700; font-size: 16px; word-wrap: break-word;">{{user_name}}</div>
+                </div>
+                
+                <!-- Email -->
+                <div style="margin-bottom: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 3px solid #2196F3;">
+                    <div style="color: #666; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; font-weight: 600;">Email Address</div>
+                    <div style="color: #2c3e50; font-weight: 700; font-size: 14px; word-wrap: break-word; overflow-wrap: break-word;">{{user_email}}</div>
+                </div>
+                
+                <!-- Date & Time -->
+                <div style="padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 3px solid #FF9800;">
+                    <div style="color: #666; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; font-weight: 600;">Date & Time</div>
+                    <div style="color: #2c3e50; font-weight: 700; font-size: 14px;">{{download_date}}</div>
+                </div>
+            </div>
+            
+            <!-- Action Button -->
+            <div style="text-align: center; margin-top: 25px;">
+                <a href="mailto:{{user_email}}" style="display: inline-block; background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); color: white; text-decoration: none; padding: 15px 30px; border-radius: 25px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);">
+                    📧 Reply to {{user_name}}
+                </a>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div style="background: #f8f9fa; padding: 20px; text-align: center; border-top: 1px solid #e0e0e0;">
+            <div style="width: 40px; height: 3px; background: #4CAF50; border-radius: 2px; margin: 0 auto 15px;"></div>
+            <p style="color: #666; margin: 0; font-size: 13px; font-weight: 500;">
+                💼 Sent from your portfolio website
+            </p>
+            <p style="color: #4CAF50; margin: 5px 0 0 0; font-size: 14px; font-weight: 700;">
+                aditya-dubewar.com
+            </p>
+        </div>
+        
+    </div>
+    
+</body>
+</html> 

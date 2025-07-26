@@ -386,3 +386,54 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 }); 
+
+
+
+javascript
+// Initialize EmailJS
+emailjs.init("mooFcbOB2PLPDcQXJ");
+
+// Handle contact form submission
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Get form data
+    const formData = {
+        user_name: document.getElementById('fullName').value,
+        user_email: document.getElementById('email').value,
+        message: document.getElementById('message').value,
+        download_date: new Date().toLocaleString(),
+        to_email: 'shreyashdubewar.dump@gmail.com'
+    };
+    
+    // Show loading state
+    const submitBtn = document.querySelector('.submit-btn');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
+    
+    // Send email using EmailJS
+    emailjs.send('service_080906', 'template_ck7tc3p', formData)
+        .then(function(response) {
+            console.log('Email sent successfully:', response);
+            
+            // Show success message
+            showContactNotification('Message sent successfully!', 'success');
+            
+            // Reset form
+            document.getElementById('contact-form').reset();
+            
+            // Reset button
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        }, function(error) {
+            console.log('Failed to send email:', error);
+            
+            // Show error message
+            showContactNotification('Failed to send message. Please try again.', 'error');
+            
+            // Reset button
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        });
+});
