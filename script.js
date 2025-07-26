@@ -45,11 +45,26 @@ function animate() {
 // Start animation
 animate();
 
-// Loading screen logic
-setTimeout(() => {
-    document.querySelector('.loading-screen').style.display = 'none';
-    document.querySelector('.main-content').classList.remove('hidden');
-}, 2000);
+// Loading screen logic - only show on initial site load
+function showLoadingAnimationIfNeeded() {
+    if (sessionStorage.getItem('modelAnimationShown')) {
+        // Hide the loading screen immediately if already shown in this session
+        const loadingScreen = document.querySelector('.loading-screen');
+        const mainContent = document.querySelector('.main-content');
+        if (loadingScreen) loadingScreen.style.display = 'none';
+        if (mainContent) mainContent.classList.remove('hidden');
+        return;
+    }
+    
+    // Show the animation as normal, then set the flag
+    setTimeout(() => {
+        const loadingScreen = document.querySelector('.loading-screen');
+        const mainContent = document.querySelector('.main-content');
+        if (loadingScreen) loadingScreen.style.display = 'none';
+        if (mainContent) mainContent.classList.remove('hidden');
+        sessionStorage.setItem('modelAnimationShown', 'true');
+    }, 2000);
+}
 
 // Handle active navigation state
 const navLinks = document.querySelectorAll('nav a');
@@ -250,27 +265,7 @@ function setupLetsTalkTransition() {
     });
 }
 
-// Only show loading/model animation on first site load in this session
-function showLoadingAnimationIfNeeded() {
-    if (sessionStorage.getItem('modelAnimationShown')) {
-        // Hide or skip the loading/model animation if present
-        const loadingScreen = document.querySelector('.loading-screen');
-        if (loadingScreen) loadingScreen.style.display = 'none';
-        return;
-    }
-    // Show the animation as normal, then set the flag
-    const loadingScreen = document.querySelector('.loading-screen');
-    if (loadingScreen) {
-        loadingScreen.style.display = '';
-        // You may want to add your animation logic here
-        setTimeout(() => {
-            loadingScreen.style.display = 'none';
-            sessionStorage.setItem('modelAnimationShown', 'true');
-        }, 1800); // Adjust duration as needed
-    } else {
-        sessionStorage.setItem('modelAnimationShown', 'true');
-    }
-}
+
 
 // Google Sign-In and Resume Download functionality
 function handleCredentialResponse(response) {

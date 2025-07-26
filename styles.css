@@ -141,6 +141,28 @@ nav ul li a.active .nav-dot {
     background: #43e97b;
 }
 
+/* Mobile line indicator */
+.nav-line {
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    background: #000;
+    border-radius: 0.5px;
+    transform: translateX(-50%);
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-line.animate {
+    width: 80%;
+}
+
+/* Ensure nav links have relative positioning for mobile line */
+nav ul li a {
+    position: relative;
+}
+
 @media (max-width: 768px) {
     .nav-container {
         width: calc(95% - (25% * var(--scroll-progress, 0)));
@@ -154,14 +176,26 @@ nav ul li a.active .nav-dot {
         gap: 20px;
     }
     
+    /* Hide dot on mobile, show line instead */
     .nav-dot {
-        margin-right: 4px;
-        width: 4px;
-        height: 4px;
+        display: none !important;
     }
     
-    nav ul li a.active .nav-dot {
-        box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.18), 0 0 6px 1.5px #4CAF50, 0 0 10px 2px #4CAF5033;
+    /* Mobile line indicator styles */
+    .nav-line {
+        position: absolute;
+        bottom: -2px;
+        left: 50%;
+        width: 0;
+        height: 1px;
+        background: #000;
+        border-radius: 0.5px;
+        transform: translateX(-50%);
+        transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .nav-line.animate {
+        width: 80%;
     }
 }
 

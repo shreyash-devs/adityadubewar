@@ -59,16 +59,37 @@ function createNavbar() {
         lastScroll = currentScroll;
     }, { passive: true });
 
-    // Helper to set nav-dot for active link
-    function setActiveNavDot(linkId) {
+    // Helper to set active link indicator (dot for desktop, line for mobile)
+    function setActiveNavIndicator(linkId) {
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.classList.remove('active');
+            // Remove any existing indicators
+            const existingDot = link.querySelector('.nav-dot');
+            const existingLine = link.querySelector('.nav-line');
+            if (existingDot) existingDot.remove();
+            if (existingLine) existingLine.remove();
             link.innerHTML = link.textContent;
         });
+        
         const activeLink = document.getElementById(linkId);
         if (activeLink) {
             activeLink.classList.add('active');
-            activeLink.innerHTML = `<span class="nav-dot"></span>${activeLink.textContent}`;
+            
+            // Check if mobile or desktop
+            const isMobile = window.innerWidth <= 768;
+            
+            if (isMobile) {
+                // Add animated line for mobile
+                activeLink.innerHTML = `${activeLink.textContent}<span class="nav-line"></span>`;
+                // Trigger line animation
+                setTimeout(() => {
+                    const line = activeLink.querySelector('.nav-line');
+                    if (line) line.classList.add('animate');
+                }, 10);
+            } else {
+                // Add glowing dot for desktop
+                activeLink.innerHTML = `<span class="nav-dot"></span>${activeLink.textContent}`;
+            }
         }
     }
 
@@ -87,17 +108,17 @@ function createNavbar() {
                 if (!found && scrollY >= sectionTop && scrollY < sectionBottom) {
                     found = true;
                     if (section.id === 'about') {
-                        setActiveNavDot('nav-about');
+                        setActiveNavIndicator('nav-about');
                     } else if (section.id === 'projects') {
-                        setActiveNavDot('nav-projects');
+                        setActiveNavIndicator('nav-projects');
                     } else {
-                        setActiveNavDot('nav-home');
+                        setActiveNavIndicator('nav-home');
                     }
                 }
             });
-            if (!found) setActiveNavDot('nav-home');
+            if (!found) setActiveNavIndicator('nav-home');
         } else if (currentPage === 'contact.html') {
-            setActiveNavDot('nav-contact');
+            setActiveNavIndicator('nav-contact');
         }
     }
 
@@ -148,8 +169,17 @@ function createNavbar() {
 
     // Set active for contact page on load
     if (window.location.pathname.endsWith('contact.html')) {
-        setActiveNavDot('nav-contact');
+        setActiveNavIndicator('nav-contact');
     }
+    
+    // Handle window resize to switch between mobile and desktop indicators
+    window.addEventListener('resize', () => {
+        // Debounce the resize event
+        clearTimeout(window.resizeTimeout);
+        window.resizeTimeout = setTimeout(() => {
+            updateActiveNav();
+        }, 250);
+    });
 }
 
 // Initialize navbar when DOM is loaded
