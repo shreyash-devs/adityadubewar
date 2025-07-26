@@ -172,7 +172,88 @@ window.addEventListener('load', () => {
 //     });
 // }
 
+// Modern fade-up animation for section titles and project tiles
+function revealOnScroll() {
+    const fadeUps = document.querySelectorAll('.fade-up');
+    const observer = new window.IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+    fadeUps.forEach(el => observer.observe(el));
+}
+
+// Project slider for first project tile
+function initProjectSlider() {
+    const slider = document.querySelector('.project-slider');
+    if (!slider) return;
+    const images = slider.querySelectorAll('.slider-img');
+    const prevBtn = slider.querySelector('.prev-btn');
+    const nextBtn = slider.querySelector('.next-btn');
+    let current = 0;
+    let autoSlide;
+    let autoSlideDelay = 3500;
+    function showSlide(idx) {
+        images.forEach((img, i) => img.classList.toggle('active', i === idx));
+        current = idx;
+    }
+    function nextSlide() {
+        showSlide((current + 1) % images.length);
+    }
+    function prevSlide() {
+        showSlide((current - 1 + images.length) % images.length);
+    }
+    function startAutoSlide() {
+        stopAutoSlide();
+        autoSlide = setInterval(nextSlide, autoSlideDelay);
+    }
+    function stopAutoSlide() {
+        if (autoSlide) clearInterval(autoSlide);
+    }
+    nextBtn.addEventListener('click', () => {
+        nextSlide();
+        stopAutoSlide();
+        setTimeout(startAutoSlide, 6000);
+    });
+    prevBtn.addEventListener('click', () => {
+        prevSlide();
+        stopAutoSlide();
+        setTimeout(startAutoSlide, 6000);
+    });
+    showSlide(0);
+    startAutoSlide();
+}
+
+// Smooth transition to contact page when 'Let's Talk' circular button is clicked
+function setupLetsTalkTransition() {
+    const letsTalkBtn = document.getElementById('lets-talk-btn');
+    const pageTransition = document.getElementById('page-transition');
+    if (!letsTalkBtn || !pageTransition) return;
+    letsTalkBtn.style.cursor = 'pointer';
+    letsTalkBtn.addEventListener('click', function(e) {
+        // Get button center position
+        const rect = letsTalkBtn.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        // Position the transition circle
+        pageTransition.style.left = `${cx}px`;
+        pageTransition.style.top = `${cy}px`;
+        pageTransition.classList.add('active');
+        document.body.classList.add('transitioning');
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => {
+            window.location.href = 'contact.html';
+        }, 1100);
+    });
+}
+
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     // ... other initializations ...
+    revealOnScroll();
+    initProjectSlider();
+    setupLetsTalkTransition();
 }); 

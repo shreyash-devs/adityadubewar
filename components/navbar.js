@@ -59,48 +59,66 @@ function createNavbar() {
         lastScroll = currentScroll;
     }, { passive: true });
 
-    // Set active state based on current page
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    const currentHash = window.location.hash;
-
-    if (currentPage === 'index.html') {
-        if (!currentHash) {
-            document.getElementById('nav-home').classList.add('active');
-            document.getElementById('nav-home').innerHTML = '<span class="nav-dot"></span>Home';
-        } else if (currentHash === '#about') {
-            document.getElementById('nav-about').classList.add('active');
-            document.getElementById('nav-about').innerHTML = '<span class="nav-dot"></span>About';
-        } else if (currentHash === '#projects') {
-            document.getElementById('nav-projects').classList.add('active');
-            document.getElementById('nav-projects').innerHTML = '<span class="nav-dot"></span>Projects';
+    // Helper to set nav-dot for active link
+    function setActiveNavDot(linkId) {
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.classList.remove('active');
+            link.innerHTML = link.textContent;
+        });
+        const activeLink = document.getElementById(linkId);
+        if (activeLink) {
+            activeLink.classList.add('active');
+            activeLink.innerHTML = `<span class="nav-dot"></span>${activeLink.textContent}`;
         }
-    } else if (currentPage === 'contact.html') {
-        document.getElementById('nav-contact').classList.add('active');
-        document.getElementById('nav-contact').innerHTML = '<span class="nav-dot"></span>Contact';
     }
 
-    // Update active state on scroll for index page sections
-    if (currentPage === 'index.html') {
-        window.addEventListener('scroll', () => {
+    // Set active state based on current page/section
+    function updateActiveNav() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const currentHash = window.location.hash;
+        if (currentPage === 'index.html') {
+            // Section-based highlighting
+            let found = false;
             const sections = document.querySelectorAll('section[id]');
+            const scrollY = window.scrollY;
             sections.forEach(section => {
-                const sectionTop = section.offsetTop - 100;
+                const sectionTop = section.offsetTop - 120;
                 const sectionBottom = sectionTop + section.offsetHeight;
-                
-                if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
-                    const currentId = section.getAttribute('id');
-                    document.querySelectorAll('.nav-links a').forEach(link => {
-                        link.classList.remove('active');
-                        link.innerHTML = link.textContent;
-                    });
-                    const activeLink = document.querySelector(`a[href="#${currentId}"]`);
-                    if (activeLink) {
-                        activeLink.classList.add('active');
-                        activeLink.innerHTML = `<span class="nav-dot"></span>${activeLink.textContent}`;
+                if (!found && scrollY >= sectionTop && scrollY < sectionBottom) {
+                    found = true;
+                    if (section.id === 'about') {
+                        setActiveNavDot('nav-about');
+                    } else {
+                        setActiveNavDot('nav-home');
                     }
                 }
             });
+            if (!found) setActiveNavDot('nav-home');
+        } else if (currentPage === 'contact.html') {
+            setActiveNavDot('nav-contact');
+        }
+    }
+
+    // Initial highlight
+    updateActiveNav();
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
+    window.addEventListener('hashchange', updateActiveNav);
+
+    // Also update on nav click
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', e => {
+            // For hash links, smooth scroll and update
+            if (link.hash) {
+                e.preventDefault();
+                document.querySelector(link.hash).scrollIntoView({ behavior: 'smooth' });
+                setTimeout(updateActiveNav, 400);
+            }
         });
+    });
+
+    // Set active for contact page on load
+    if (window.location.pathname.endsWith('contact.html')) {
+        setActiveNavDot('nav-contact');
     }
 }
 

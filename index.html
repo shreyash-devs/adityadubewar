@@ -25,7 +25,7 @@
                     <div class="image-container">
                         <img src="aditya.jpg" alt="Profile Image" class="profile-image">
                     </div>
-                    <div class="circular-text">
+                    <div class="circular-text" id="lets-talk-btn">
                         <svg viewBox="0 0 100 100">
                             <path id="circle" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none"/>
                             <text>
@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="hero-right">
-                    <h1>
+                    <h1 class="fade-up">
                         <span class="line-1">A creative</span>
                         <span class="line-2">BIM professional</span>
                         <span class="line-3">& structural designer</span>
@@ -133,12 +133,88 @@
         <section class="about" id="about">
             <div class="about-gradient-bar"></div>
             <div class="about-container">
-                <h2 class="about-title">About Me</h2>
+                <h2 class="about-title fade-up">About Me</h2>
                 <p class="about-desc">
                     <span style="color:#4CAF50;font-weight:600;">Hi, I'm Aditya!</span> I'm a passionate <b>BIM professional</b> and <b>structural designer</b> with a strong background in civil engineering. My journey has taken me through diverse projects, where I've leveraged technology and creativity to deliver innovative solutions.<br><br>
                     I thrive on collaborating with multidisciplinary teams and am dedicated to <span style="color:#4CAF50;font-weight:500;">continuous learning</span> and growth. Whether it's optimizing workflows, designing resilient structures, or mentoring peers, I bring energy and expertise to every challenge.<br><br>
                     <span style="font-style:italic;">Let's build the future together!</span>
                 </p>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="projects" id="projects">
+            <div class="projects-container">
+                <div class="about-gradient-bar"></div>
+                <h2 class="projects-title fade-up">Projects</h2>
+                <div class="projects-grid">
+                    <!-- Project Tile 1 -->
+                    <div class="project-tile fade-up">
+                        <div class="project-slider">
+                            <div class="slider-images">
+                                <img src="assets/HS2.jpg" alt="HS2 Old Oak Common Station 1" class="slider-img active">
+                                <img src="assets/HS2-2.jpg" alt="HS2 Old Oak Common Station 2" class="slider-img">
+                                <img src="assets/HS2-3.jpg" alt="HS2 Old Oak Common Station 3" class="slider-img">
+                            </div>
+                            <button class="slider-btn prev-btn" aria-label="Previous image">&#10094;</button>
+                            <button class="slider-btn next-btn" aria-label="Next image">&#10095;</button>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-name">HS2 | Old Oak Common Station, UK</h3>
+                            <p class="project-desc">
+                                <strong>Sep 2021 - Dec 2022</strong><br>
+                                <span style='color:#666;'>Associated with Kashec Engineers Pvt. Ltd.</span>
+                            </p>
+                            <div class="project-skills">
+                                <span class="project-skill"><img src="assets/navisworks-logo.png" class="skill-icon" alt="BIM Coordination">BIM Coordination</span>
+                                <span class="project-skill"><img src="assets/recaplogo.png" class="skill-icon" alt="BIMcollab Cloud">BIMcollab Cloud</span>
+                                <span class="project-skill"><img src="assets/recaplogo.png" class="skill-icon" alt="Autodesk BIM 360">Autodesk BIM 360</span>
+                                <span class="project-skill"><img src="assets/msproject.png" class="skill-icon" alt="Construction Management">Construction Management</span>
+                                <span class="project-skill"><img src="assets/revit_logo.jpg" class="skill-icon" alt="Structural Modeling">Structural Modeling</span>
+                                <span class="project-skill"><img src="assets/c3d_logo" class="skill-icon" alt="CADS RC">CADS RC</span>
+                                <span class="project-skill"><img src="assets/excel_logo.jpg" class="skill-icon" alt="Asite Platform">Asite Platform</span>
+                            </div>
+                            <a href="#" class="project-preview-btn">Preview</a>
+                        </div>
+                    </div>
+                    <!-- Project Tile 2 -->
+                    <div class="project-tile fade-up">
+                        <img src="assets/bim-model.jpg" alt="Everton Football Club Stadium" class="project-image">
+                        <div class="project-content">
+                            <h3 class="project-name">Everton Football Club Stadium 🏟</h3>
+                            <p class="project-desc">
+                                <strong>Jun 2022 - Jan 2023</strong><br>
+                                BIM model development as per Design Consultant
+                            </p>
+                            <div class="project-skills">
+                                <span class="project-skill"><img src="assets/navisworks-logo.png" class="skill-icon" alt="BIM Coordination">BIM Coordination</span>
+                                <span class="project-skill"><img src="assets/Dynamo_logo.png" class="skill-icon" alt="BIM Services">BIM Services</span>
+                                <span class="project-skill"><img src="assets/recaplogo.png" class="skill-icon" alt="Autodesk BIM 360">Autodesk BIM 360</span>
+                                <span class="project-skill"><img src="assets/excel_logo.jpg" class="skill-icon" alt="Asite">Asite</span>
+                                <span class="project-skill"><img src="assets/c3d_logo" class="skill-icon" alt="Steel structure">Steel structure</span>
+                                <span class="project-skill"><img src="assets/revit_logo.jpg" class="skill-icon" alt="3D Visualization">3D Visualization</span>
+                            </div>
+                            <a href="#" class="project-preview-btn">Preview</a>
+                        </div>
+                    </div>
+                    <!-- Project Tile 3 -->
+                    <div class="project-tile fade-up">
+                        <img src="assets/bim-model.jpg" alt="South Quay Plaza, UK" class="project-image">
+                        <div class="project-content">
+                            <h3 class="project-name">South Quay Plaza, UK</h3>
+                            <p class="project-desc">
+                                <strong>Mar 2021 - Jun 2021</strong><br>
+                                South Quay Plaza is a commercial building located in London, UK. It stands at a height of 225 meters (738 feet) and has B3+G+46 floors.
+                            </p>
+                            <div class="project-skills">
+                                <span class="project-skill"><img src="assets/navisworks-logo.png" class="skill-icon" alt="BIM Coordination">BIM Coordination</span>
+                                <span class="project-skill"><img src="assets/revit_logo.jpg" class="skill-icon" alt="Structural Modeling">Structural Modeling</span>
+                                <span class="project-skill"><img src="assets/Dynamo_logo.png" class="skill-icon" alt="3D Visualization">3D Visualization</span>
+                            </div>
+                            <a href="#" class="project-preview-btn">Preview</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -199,5 +275,6 @@
 
     <script src="components/navbar.js"></script>
     <script src="script.js"></script>
+    <div class="page-transition" id="page-transition"></div>
 </body>
 </html> 
