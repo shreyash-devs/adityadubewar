@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
     <!-- Loading Screen -->
@@ -47,7 +49,22 @@
                         <span class="line-3">& structural designer</span>
                     </h1>
                     <p>I collaborate with clients globally to design impactful, mission-focused civil structures that drive results and achieve construction goals.</p>
-                    <button class="resume-btn">My Resume</button>
+                    <button class="resume-btn" id="resume-btn">My Resume</button>
+                    <div id="g_id_onload"
+                         data-client_id="321930688267-7fc8qo66ejl7j6ptpdc16cf4gsnr3u0e.apps.googleusercontent.com"
+                         data-callback="handleCredentialResponse"
+                         data-auto_prompt="false">
+                    </div>
+                    <div class="g_id_signin"
+                         data-type="standard"
+                         data-size="large"
+                         data-theme="outline"
+                         data-text="sign_in_with"
+                         data-shape="rectangular"
+                         data-logo_alignment="left"
+                         data-width="300"
+                         style="display: none;">
+                    </div>
                 </div>
             </div>
         </section>
@@ -134,7 +151,7 @@
             <div class="about-gradient-bar"></div>
             <div class="about-container">
                 <h2 class="about-title fade-up">About Me</h2>
-                <p class="about-desc">
+                <p class="about-desc fade-up">
                     <span style="color:#4CAF50;font-weight:600;">Hi, I'm Aditya!</span> I'm a passionate <b>BIM professional</b> and <b>structural designer</b> with a strong background in civil engineering. My journey has taken me through diverse projects, where I've leveraged technology and creativity to deliver innovative solutions.<br><br>
                     I thrive on collaborating with multidisciplinary teams and am dedicated to <span style="color:#4CAF50;font-weight:500;">continuous learning</span> and growth. Whether it's optimizing workflows, designing resilient structures, or mentoring peers, I bring energy and expertise to every challenge.<br><br>
                     <span style="font-style:italic;">Let's build the future together!</span>
@@ -217,7 +234,7 @@
                 </div>
             </div>
         </section>
-
+        <div class="about-gradient-bar" style="margin: 0 auto 40px auto;"></div>
         <!-- Experience Section -->
         <!--
         <section class="experience">
@@ -271,6 +288,24 @@
             <div class="section-divider"></div>
         </section>
         -->
+        <!-- Modern Call-to-Action Section -->
+        <section class="cta-section">
+            <div class="cta-card">
+                <div class="cta-availability fade-up"><span class="cta-dot"></span> Available for work</div>
+                <h2 class="cta-title fade-up">Let's create your<br>next big idea.</h2>
+                <a href="contact.html" class="cta-btn fade-up">Contact Me</a>
+            </div>
+            <footer class="cta-footer">
+                <span>&copy; 2025 Aditya Dubewar. All rights reserved.</span>
+                                        <div class="cta-socials">
+                            <a href="https://www.linkedin.com/in/aditya-dubewar/?profileId=ACoAACKYzlYBCRD6QFtPZ8P03DKjRSZH15EKcm4" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                            <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="mailto:shreyashdubewar.dump@gmail.com" aria-label="Email"><i class="fa-regular fa-envelope"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                        </div>
+            </footer>
+        </section>
     </div>
 
     <script src="components/navbar.js"></script>

@@ -250,10 +250,144 @@ function setupLetsTalkTransition() {
     });
 }
 
+// Only show loading/model animation on first site load in this session
+function showLoadingAnimationIfNeeded() {
+    if (sessionStorage.getItem('modelAnimationShown')) {
+        // Hide or skip the loading/model animation if present
+        const loadingScreen = document.querySelector('.loading-screen');
+        if (loadingScreen) loadingScreen.style.display = 'none';
+        return;
+    }
+    // Show the animation as normal, then set the flag
+    const loadingScreen = document.querySelector('.loading-screen');
+    if (loadingScreen) {
+        loadingScreen.style.display = '';
+        // You may want to add your animation logic here
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';
+            sessionStorage.setItem('modelAnimationShown', 'true');
+        }, 1800); // Adjust duration as needed
+    } else {
+        sessionStorage.setItem('modelAnimationShown', 'true');
+    }
+}
+
+// Google Sign-In and Resume Download functionality
+function handleCredentialResponse(response) {
+    // Decode the JWT token to get user info
+    const responsePayload = decodeJwtResponse(response.credential);
+    
+    // Get user email
+    const userEmail = responsePayload.email;
+    const userName = responsePayload.name;
+    
+    console.log("User signed in:", userName, userEmail);
+    
+    // Download the resume
+    downloadResume();
+    
+    // Send notification email (you'll need to set up EmailJS)
+    sendDownloadNotification(userEmail, userName);
+}
+
+function decodeJwtResponse(token) {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+}
+
+function downloadResume() {
+    // Create a temporary link element
+    const link = document.createElement('a');
+    link.href = 'Aditya_Dubewar_Resume.pdf'; // Make sure this file exists in your root directory
+    link.download = 'Aditya_Dubewar_Resume.pdf';
+    link.style.display = 'none';
+    
+    // Append to body, click, and remove
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    // Show success message
+    showNotification('Resume downloaded successfully!', 'success');
+}
+
+function sendDownloadNotification(userEmail, userName) {
+    // Initialize EmailJS with your actual User ID
+    emailjs.init("mooFcbOB2PLPDcQXJ");
+    
+    // Send email notification
+    const templateParams = {
+        user_email: userEmail,
+        user_name: userName,
+        download_date: new Date().toLocaleString(),
+        to_email: 'shreyashdubewar.dump@gmail.com' // Your email address
+    };
+    
+    // Send the email with your actual Service ID and Template ID
+    emailjs.send('service_080906', 'template_1z22ntf', templateParams)
+        .then(function(response) {
+            console.log('Email notification sent successfully:', response);
+        }, function(error) {
+            console.log('Failed to send email notification:', error);
+        });
+    
+    console.log(`Resume downloaded by: ${userName} (${userEmail})`);
+}
+
+function showNotification(message, type = 'info') {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? '#4CAF50' : '#2196F3'};
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        z-index: 10000;
+        font-family: 'Syne', sans-serif;
+        font-size: 14px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Animate in
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 3000);
+}
+
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // ... other initializations ...
+    showLoadingAnimationIfNeeded();
     revealOnScroll();
     initProjectSlider();
     setupLetsTalkTransition();
+    
+    // Add click handler for resume button
+    const resumeBtn = document.getElementById('resume-btn');
+    if (resumeBtn) {
+        resumeBtn.addEventListener('click', () => {
+            // Trigger Google Sign-In
+            google.accounts.id.prompt();
+        });
+    }
 }); 

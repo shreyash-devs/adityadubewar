@@ -88,6 +88,8 @@ function createNavbar() {
                     found = true;
                     if (section.id === 'about') {
                         setActiveNavDot('nav-about');
+                    } else if (section.id === 'projects') {
+                        setActiveNavDot('nav-projects');
                     } else {
                         setActiveNavDot('nav-home');
                     }
@@ -108,13 +110,41 @@ function createNavbar() {
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', e => {
             // For hash links, smooth scroll and update
-            if (link.hash) {
+            const href = link.getAttribute('href');
+            const isHome = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname === '';
+            if (href === './index.html' || href === 'index.html') {
+                // Always go to home page
+                window.location.href = 'index.html';
+                return;
+            }
+            if (href === './contact.html' || href === 'contact.html') {
+                // Always go to contact page
+                window.location.href = 'contact.html';
+                return;
+            }
+            if (href.includes('#about') || href.includes('#projects')) {
                 e.preventDefault();
-                document.querySelector(link.hash).scrollIntoView({ behavior: 'smooth' });
-                setTimeout(updateActiveNav, 400);
+                const targetId = href.split('#')[1];
+                if (isHome) {
+                    // On home, smooth scroll
+                    document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+                    setTimeout(updateActiveNav, 400);
+                } else {
+                    // Not on home, go to home and scroll after load
+                    window.location.href = `index.html#${targetId}`;
+                }
             }
         });
     });
+
+    // If landing on home with a hash, scroll to section after load
+    if ((window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname === '') && window.location.hash) {
+        const targetId = window.location.hash.replace('#', '');
+        setTimeout(() => {
+            const target = document.getElementById(targetId);
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+    }
 
     // Set active for contact page on load
     if (window.location.pathname.endsWith('contact.html')) {
