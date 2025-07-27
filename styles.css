@@ -260,6 +260,7 @@ body {
 }
 
 nav {
+    height: 40px;
     background: rgba(255, 255, 255, calc(0.95 * var(--scroll-progress, 0)));
     backdrop-filter: blur(calc(10px * var(--scroll-progress, 0)));
     -webkit-backdrop-filter: blur(calc(10px * var(--scroll-progress, 0)));
