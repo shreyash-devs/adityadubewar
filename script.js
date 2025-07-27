@@ -1,49 +1,94 @@
-// Three.js Scene Setup
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, 300 / 300, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(300, 300);
-document.getElementById('bim-model').appendChild(renderer.domElement);
+// Video Model Interaction
+let videoElement;
+let playPauseBtn;
+let resetBtn;
 
-// Create a simple building structure
-function createBuilding() {
-    const geometry = new THREE.BoxGeometry(2, 4, 2);
-    const material = new THREE.MeshPhongMaterial({ color: 0x4CAF50 });
-    const building = new THREE.Mesh(geometry, material);
+function initVideoModel() {
+    videoElement = document.getElementById('model-video');
+    playPauseBtn = document.getElementById('play-pause-btn');
+    resetBtn = document.getElementById('reset-btn');
     
-    // Add some details
-    const roof = new THREE.ConeGeometry(1.5, 1, 4);
-    const roofMesh = new THREE.Mesh(roof, material);
-    roofMesh.position.y = 2.5;
-    building.add(roofMesh);
+    if (!videoElement || !playPauseBtn || !resetBtn) return;
     
-    return building;
+    // Play/Pause functionality
+    playPauseBtn.addEventListener('click', togglePlayPause);
+    videoElement.addEventListener('click', togglePlayPause);
+    
+    // Reset functionality
+    resetBtn.addEventListener('click', resetVideo);
+    
+    // Update button text based on video state
+    videoElement.addEventListener('play', updatePlayButton);
+    videoElement.addEventListener('pause', updatePlayButton);
+    
+    // Initialize button state
+    updatePlayButton();
+    
+    // Initialize touch controls
+    initTouchControls();
 }
 
-// Add lighting
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-scene.add(ambientLight);
-
-const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-directionalLight.position.set(5, 5, 5);
-scene.add(directionalLight);
-
-// Add building to scene
-const building = createBuilding();
-scene.add(building);
-
-// Position camera
-camera.position.z = 8;
-
-// Animation
-function animate() {
-    requestAnimationFrame(animate);
-    building.rotation.y += 0.01;
-    renderer.render(scene, camera);
+function togglePlayPause() {
+    if (videoElement.paused) {
+        videoElement.play();
+    } else {
+        videoElement.pause();
+    }
 }
 
-// Start animation
-animate();
+function resetVideo() {
+    videoElement.currentTime = 0;
+    videoElement.play();
+}
+
+function updatePlayButton() {
+    if (videoElement.paused) {
+        playPauseBtn.textContent = '▶';
+    } else {
+        playPauseBtn.textContent = '⏸';
+    }
+}
+
+// Add keyboard controls
+document.addEventListener('keydown', function(e) {
+    if (videoElement && document.querySelector('.loading-screen').style.display !== 'none') {
+        switch(e.code) {
+            case 'Space':
+                e.preventDefault();
+                togglePlayPause();
+                break;
+            case 'KeyR':
+                e.preventDefault();
+                resetVideo();
+                break;
+        }
+    }
+});
+
+// Add touch gestures for mobile
+let touchStartY = 0;
+let touchStartTime = 0;
+
+function initTouchControls() {
+    if (!videoElement) return;
+    
+    videoElement.addEventListener('touchstart', function(e) {
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = Date.now();
+    });
+    
+    videoElement.addEventListener('touchend', function(e) {
+        const touchEndY = e.changedTouches[0].clientY;
+        const touchEndTime = Date.now();
+        const touchDuration = touchEndTime - touchStartTime;
+        const touchDistance = Math.abs(touchEndY - touchStartY);
+        
+        // Short tap to play/pause
+        if (touchDuration < 200 && touchDistance < 10) {
+            togglePlayPause();
+        }
+    });
+}
 
 // Loading screen logic - only show on initial site load
 function showLoadingAnimationIfNeeded() {
@@ -376,6 +421,7 @@ document.addEventListener('DOMContentLoaded', () => {
     revealOnScroll();
     initProjectSlider();
     setupLetsTalkTransition();
+    initVideoModel(); // Initialize video model
     
     // Add click handler for resume button
     const resumeBtn = document.getElementById('resume-btn');
